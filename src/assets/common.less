@@ -1,0 +1,104 @@
+@import "icon.less";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+
+}
+html, body {
+  font-size: 20px;
+  height: 100%;
+}
+
+ul, li {
+  list-style: none;
+}
+
+section {
+  display: block;
+}
+img{
+  max-width: 100%;
+}
+.container {
+  position: relative;
+}
+pre{
+  background: #f6f6f6;
+}
+ code {
+  white-space: normal;
+  word-break: break-all;
+}
+pre.prettyprint {
+  padding: 10px;
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+ol.linenums {
+  color: #999;
+  padding-left: 2.5em;
+}
+ol.linenums li {
+  list-style-type: decimal;
+}
+.container-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 58px;
+  padding-top: 40px;
+  position: relative;
+}
+
+.mint-indicator {
+  position: fixed;
+  z-index: 99;
+}
+
+.text-orange {
+  color: #f37b1d;
+}
+
+.bg-blue {
+  color: #0081ff;
+  background-color: #cce6ff;
+}
+
+.bg-red {
+  color: #e54d42;
+  background-color: #fadbd9;
+}
+
+.bg-yellow {
+  color: #fbbd08;
+  background-color: #fef2ce;
+}
+
+.bg-grey {
+  color: #8799a3;
+  background-color: #e7ebed;
+}
+
+@media (min-width: 768px) {
+  body, #app, .bg, .home, .Footer, .Guide, .mint-header, .container {
+    width: 414px !important;
+    margin: 0 auto;
+  }
+}
+
+/*
+html {
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+}
+*/
+
+
