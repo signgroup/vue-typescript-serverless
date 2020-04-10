@@ -13,7 +13,7 @@
                 <ul class="grid">
                     <li v-for="(item,index) in homeNavData" :key="index" :class="['wow slideInRight', item.bg_color]"
                         :data-wow-delay="index*.1+'s'"
-                    @click="homeNavClick(item)"
+                        @click="homeNavClick(item)"
                     >
                         <i :class="['iconfont',item.icon]"></i>
                         <span>{{item.name}}</span>
@@ -58,12 +58,18 @@
         mounted() {
             this.getPromise()
         }
+
         //宫格点击
-        homeNavClick(item){
+        homeNavClick(item) {
             console.log(item.route)
             this['$router'].push({name: item.route});
         }
-        //点击文章
+
+        /*
+        * 点击文章
+        * item 当前点击数据
+        * index 当前点击索引
+        * */
         articleDetails(item, index) {
             console.log(item)
             // console.log(_.inc(1)) //数据库自增1，多人访问
@@ -82,11 +88,12 @@
                     this.articleList[index].view += 1;
                     console.log(res.result)
                     this['$router'].push({
-                        path:'article-details',
-                        query:{id:item._id}
+                        path: 'article-details',
+                        query: {id: item._id}
                     });
                 })
         }
+
         //使用Promise回调
         getPromise() {
             this['$indicator'].open('加载中...')
@@ -152,8 +159,14 @@
             })
         }
 
-        //获取日志文章
-        getBlog(resolve, str, key, value) {
+        /*
+        * 获取日志文章
+        * resolve promise 返回
+        * str 表名
+        * key 要排序的字段（日期）
+        * value 排序类型（倒序）
+        * */
+        getBlog(resolve: any, str: string, key: string, value: string) {
             // console.log(str)
             window['tcb'].callFunction({
                 name: 'getCloud',
@@ -291,7 +304,7 @@
                         width: 25%;
                         height: 100%;
                         float: left;
-                        border-right: 1px dashed #ddd;
+                        /*border-right: 1px dashed #ddd;*/
                         display: flex;
                         flex-direction: column;
                         align-items: center;

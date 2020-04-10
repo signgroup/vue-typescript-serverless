@@ -48,7 +48,7 @@
         img {
             width: 100%;
         }
-        .container{
+        .container {
             padding: 0 15px;
         }
     }
