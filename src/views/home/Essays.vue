@@ -1,8 +1,8 @@
 <template>
     <div class="Essays">
         <mt-header fixed title="随笔">
-            <router-link to="/home" slot="left">
-                <mt-button icon="back">返回</mt-button>
+            <router-link to="" slot="left">
+                <mt-button icon="back" @click="$router.back(-1)">返回</mt-button>
             </router-link>
         </mt-header>
         <div class="gradual-blue" :style="{ opacity:opacity }"></div>
@@ -22,11 +22,12 @@
                     infinite-scroll-disabled="loading"
                     :infinite-scroll-immediate-check="essayList"
                     infinite-scroll-distance="10">
-                    <li v-for="item in essayList" class="wow fadeInUp">
+                    <li v-for="(item,index) in essayList" class="wow fadeInUp">
                         <div class="time ">{{item.date}}</div>
                         <div class="time-item ">
                             <div class="essay-content">
-                                <span class="t-text">{{item.content}}</span>
+                                <p :class="['t-text',index!=overflow?'ellipsis-3':'']" @click="bindOverflow(index)">
+                                    {{item.content}}{{item.overflow}}</p>
                             </div>
                         </div>
                     </li>
@@ -53,6 +54,7 @@
             nickName: '初见博客'
         };
         private essayList = [];
+        private overflow: number = -1;
         private skip: number = 0;//数据从0开始
         private limit: number = 20;//每页显示的条数
         private loading: boolean = false;
@@ -76,6 +78,11 @@
             }
             this.getEssayList(this.skip, this.limit)
 
+        }
+
+        //隐藏显示
+        bindOverflow(index) {
+            this.overflow == index ? this.overflow = -1 : this.overflow = index
         }
 
         // 获取数据
@@ -207,7 +214,7 @@
                             animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
                             offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
                             mobile: true,       // 是否在移动设备中开启动画
-                            live: true,        // 持续监测页面中是否插入新的wow元素
+                            live: false,        // 持续监测页面中是否插入新的wow元素
                         }
                     );
                     wow.init();
@@ -297,17 +304,16 @@
                         flex-direction: row;
                         justify-content: flex-start;
                         margin-bottom: 10px;
-                        .time{
-                            width: 50px;
-                            padding-top: 5px;
+                        .time {
+                            width: 54px;
+                            padding-top: 3px;
                         }
-                         .time-item {
+                        .time-item {
                             width: 100%;
-                             .t-text{
-                                 display: block;
-                                 box-shadow: 0px 0px 10px rgba(0,0,0,.1);
-                                 padding: 5px;
-                             }
+                            .t-text {
+                                box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+                                padding: 2px;
+                            }
                         }
                     }
                 }

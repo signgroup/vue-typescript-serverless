@@ -1,5 +1,5 @@
 @import "icon.less";
-
+@import "scoped.less";
 * {
   margin: 0;
   padding: 0;
@@ -8,7 +8,7 @@
 
 }
 html, body {
-  font-size: 20px;
+  font-size: 12px;
   height: 100%;
 }
 
@@ -20,7 +20,7 @@ section {
   display: block;
 }
 img{
-  max-width: 100%;
+  //max-width: 100%;
 }
 .container {
   position: relative;
@@ -89,7 +89,33 @@ ol.linenums li {
     margin: 0 auto;
   }
 }
-
+.ellipsis-1 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.ellipsis-2 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.ellipsis-3 {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 /*
 html {
   -webkit-filter: grayscale(100%);

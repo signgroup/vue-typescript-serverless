@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "animate.css": "^3.7.2",
+    "babel-polyfill": "^6.26.0",
     "core-js": "^2.6.5",
     "lib-flexible": "^0.3.2",
     "mint-ui": "^2.2.13",
@@ -16,6 +17,7 @@
     "postcss-px2rem": "^0.3.0",
     "postcss-pxtorem": "^5.1.1",
     "tcb-js-sdk": "^1.5.1",
+    "vconsole": "^3.3.4",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",

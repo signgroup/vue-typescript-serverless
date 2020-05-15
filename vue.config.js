@@ -22,7 +22,7 @@ module.exports = {
     assetsDir: './static',
     // eslint-loader 是否在保存的时候检查
     lintOnSave: false,
-    // productionSourceMap:false,//关闭js map文件
+    productionSourceMap:false,//关闭js map文件
     devServer: {
         port: 9900,
         hotOnly: true,//热更新

@@ -1,19 +1,24 @@
 <template>
     <div class="Index container-box">
-        <mt-header fixed title="首页"></mt-header>
+        <mt-header class="wow fadeInUp" fixed title="首页"></mt-header>
         <div class="wow fadeInUp swiper-box ">
             <mt-swipe :auto="5000">
                 <mt-swipe-item v-for="(item,index) in bannerData" :key="index">
-                    <img class="swiper-img" v-lazy="item.image" alt="">
+                    <img class="swiper-img" v-lazy.container="item.image" alt="">
                 </mt-swipe-item>
             </mt-swipe>
         </div>
+        <article class="wow fadeInUp  excerpt">
+            <p class="text-animate">
+               {{excerptText}}
+            </p>
+        </article>
         <section class="container">
             <div class="wow fadeInUp  grid-box">
                 <ul class="grid">
                     <li v-for="(item,index) in homeNavData" :key="index" :class="['wow slideInRight', item.bg_color]"
                         :data-wow-delay="index*.1+'s'"
-                        @click="homeNavClick(item)"
+                        @click="homeNavClick(item,index)"
                     >
                         <i :class="['iconfont',item.icon]"></i>
                         <span>{{item.name}}</span>
@@ -33,7 +38,7 @@
                 <div class="wow fadeInUp article-content" v-for="(item,index) in articleList" :key="index"
                      @click="articleDetails(item,index)">
                     <figure>
-                        <img class="article-img" v-lazy="item.url" alt="">
+                        <img class="article-img" v-lazy.container="item.url" alt="">
                     </figure>
                     <div class="desc">
                         <p class="d-title">{{item.title}}</p>
@@ -52,6 +57,7 @@
         private bannerData = [];
         private homeNavData = [];
         private articleList = [];
+        private excerptText:string = '当你的才华还撑不起你的野心时，那你就应该静下心来学习；当你的经济还撑不起你的梦想时，那你就应该踏实的去工作；当你的能力还驾驭不了你的目标时，就应该沉下心来，历练；梦想，不是浮躁，而是沉淀和积累，只有拼出来的美丽，没有等出来的辉煌。';
         private hostList = [];
         private loadStatus: boolean = false;
 
@@ -60,8 +66,13 @@
         }
 
         //宫格点击
-        homeNavClick(item) {
-            console.log(item.route)
+        homeNavClick(item,index) {
+            console.log(index)
+            console.log(item)
+            if(index==1){
+                this['$router'].push({name:'calculation'});
+                return
+            }
             this['$router'].push({name: item.route});
         }
 
@@ -248,7 +259,7 @@
         }
 
         @Watch('loadStatus')
-        getLoadStatus(newVal, oldVal) {
+        getLoadStatus(newVal: any, oldVal: any) {
             console.log(newVal)
             if (newVal) {
                 this.$nextTick(() => { // 在dom渲染完后,再执行动画
@@ -258,7 +269,7 @@
                             animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
                             offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
                             mobile: true,       // 是否在移动设备中开启动画
-                            live: true,        // 持续监测页面中是否插入新的wow元素
+                            live: false,        // 持续监测页面中是否插入新的wow元素
                             scrollContainer: '.home' //
                         }
                     );
@@ -292,7 +303,33 @@
                 }
                 
             }
-            
+        }
+        .excerpt {
+            width: calc(100% - 20px);
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            margin: 10px auto;
+            padding: 5px;
+            .text-animate {
+                color: #fff;
+                font-size: 18px;
+                padding-left: 60px;
+                display: inline-block;
+                white-space: nowrap;
+                animation: 100s wordsLoop linear infinite normal;
+                text-shadow: 3px 1px 5px #aa7a53;
+            }
+        }
+        @keyframes wordsLoop {
+            0% {
+                transform: translateX(0px);
+                -webkit-transform: translateX(0px);
+            }
+            100% {
+                transform: translateX(-100%);
+                -webkit-transform: translateX(-100%);
+            }
         }
         .container {
             .grid-box {

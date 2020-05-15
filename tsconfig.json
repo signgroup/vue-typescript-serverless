@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "esnext",
     "strict": false,
+    "module": "esnext",
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",

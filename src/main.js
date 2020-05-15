@@ -1,3 +1,4 @@
+// import 'babel-polyfill'
 import Vue from "vue";
 import App from './App.vue';
 import router from './router';
@@ -5,6 +6,25 @@ import store from './store';
 //MintUI框架[http://mint-ui.github.io/#!/zh-cn]
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
+if (process.env.NODE_ENV === 'production') {
+    require('./assets/consoleInfo');
+}
+//网络环境提示
+import network from './assets/network';
+const nt = network.networkType;
+console.log(nt);
+if (nt == '2g' || nt == '3g') {
+    MintUI.Toast({
+        message: '当前网络环境较慢',
+        position: 'top',
+        duration: 3000
+    });
+}
+//导入版本
+import version from "./assets/version";
+console.log('version', version.version);
+// import VConsole from 'vconsole'
+// let vConsole = new VConsole()
 //yarn add vue-tcb
 //引入云开发
 // import * as tcb from 'vue-tcb'
@@ -21,6 +41,7 @@ import 'animate.css';
 //初始化滚动动画
 // new wow.WOW().init()
 Vue.prototype.$wow = wow;
+Vue.prototype.$MintUI = MintUI;
 // 设置为 false 以阻止 vue 在启动时生成生产提示。
 Vue.config.productionTip = false;
 // @ts-ignore
@@ -37,6 +58,7 @@ Vue.prototype['tcb'] = tcb.init({
 });
 console.log(Vue.prototype);
 Vue.use(MintUI);
+// Vue.use(vConsole)
 new Vue({
     router,
     store,

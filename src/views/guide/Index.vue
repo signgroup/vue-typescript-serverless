@@ -21,7 +21,7 @@
                     </p>
                     
                     <div class=" wow slideInDown text-center copyright-text">
-		        <span>Copyright © 2017 <a href="https://13s.top/">初见博客</a>
+		        <span>Copyright © 2017 <a href="http://13s.top/">初见博客</a>
                             <br>
                          <a href="http://beian.miit.gov.cn/" target="_blank">豫ICP备17032559号-1</a> </span>
                     </div>
@@ -38,10 +38,15 @@
 
     @Component
     export default class Guide extends Vue {
-        public logoUrl: string = 'https://13s.top/logo.png';
+        public logoUrl: string = 'http://13s.top/logo.png';
 
         mounted() {
             new this['$wow'].WOW().init()
+            //幂次方
+            // 计算方法油耗×油价÷100（公里来）=一公里的油钱。
+            console.log(7.8*5.09/100*12)
+            console.log(Math.pow(3, -2) )
+            
         }
     }
 </script>
@@ -125,20 +130,21 @@
                     > p {
                         margin-bottom: 30px;
                     }
-                    
                     .h-line {
-                        background: rgba(255, 251, 251, 0.7);
+                        background: rgba(218, 218, 218, 0.7);
                         display: block;
                         width: 100%;
                         font-size: 14px;
                         color: #555;
-                        border: 1px solid #ccc;
                         border-radius: 4px;
+                        position: relative;
+                        height: 1px;
+                        transform: scaleY(0.5);
+                        transform-origin: center top;
                     }
                     .copyright-text {
                         a {
                             color: #313f47;
-                            
                         }
                     }
                 }

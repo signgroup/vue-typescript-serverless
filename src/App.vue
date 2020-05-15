@@ -112,8 +112,8 @@
         }
     }
 </script>-->
-<style lang="less">
-    @import './assets/common.less';
+<style lang="less" >
+    @import './assets/less/common';
     #nprogress .bar {
         background: #daa3fd !important; //自定义颜色
     }
