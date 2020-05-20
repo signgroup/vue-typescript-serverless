@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
-        isLoading: false
+        isLoading: false,
     },
     mutations: {
         showLoading(state) {
@@ -11,8 +11,8 @@ export default new Vuex.Store({
         },
         hideLoading(state) {
             state.isLoading = false;
-        }
+        },
     },
-    actions: {}
+    actions: {},
 });
 //# sourceMappingURL=store.js.map

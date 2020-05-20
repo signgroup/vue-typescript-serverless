@@ -1,7 +1,7 @@
-var ua = navigator.userAgent;
-var networkStr = ua.match(/NetType\/\w+/) ? ua.match(/NetType\/\w+/)[0] : 'NetType/other';
+const ua = navigator.userAgent;
+let networkStr = ua.match(/NetType\/\w+/) ? ua.match(/NetType\/\w+/)[0] : 'NetType/other';
 networkStr = networkStr.toLowerCase().replace('nettype/', '');
-var networkType;
+let networkType;
 switch (networkStr) {
     case 'wifi':
         networkType = 'wifi';
@@ -22,6 +22,6 @@ switch (networkStr) {
         networkType = 'other';
 }
 export default {
-    networkType
+    networkType,
 };
 //# sourceMappingURL=network.js.map

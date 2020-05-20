@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-      isLoading: false
+      isLoading: false,
   },
   mutations: {
-      showLoading(state){
-          state.isLoading = true
+      showLoading(state) {
+          state.isLoading = true;
       },
-      hideLoading (state) {
-          state.isLoading = false
-      }
+      hideLoading(state) {
+          state.isLoading = false;
+      },
   },
   actions: {
 
-  }
-})
+  },
+});

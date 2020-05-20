@@ -1,15 +1,15 @@
 // import 'babel-polyfill'
-import Vue from "vue";
+import Vue from 'vue';
 import App from './App.vue';
-import router from './router';
+import router from './router/index';
 import store from './store';
-//MintUI框架[http://mint-ui.github.io/#!/zh-cn]
+// MintUI框架[http://mint-ui.github.io/#!/zh-cn]
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 if (process.env.NODE_ENV === 'production') {
     require('./assets/consoleInfo');
 }
-//网络环境提示
+// 网络环境提示
 import network from './assets/network';
 const nt = network.networkType;
 console.log(nt);
@@ -17,28 +17,28 @@ if (nt == '2g' || nt == '3g') {
     MintUI.Toast({
         message: '当前网络环境较慢',
         position: 'top',
-        duration: 3000
+        duration: 3000,
     });
 }
-//导入版本
-import version from "./assets/version";
+// 导入版本
+import version from './assets/version';
 console.log('version', version.version);
 // import VConsole from 'vconsole'
 // let vConsole = new VConsole()
-//yarn add vue-tcb
-//引入云开发
+// yarn add vue-tcb
+// 引入云开发
 // import * as tcb from 'vue-tcb'
 const tcb = require('tcb-js-sdk');
-//rem弹性
+// rem弹性
 import 'lib-flexible/flexible';
-//加载进度条
+// 加载进度条
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
-//滚动动画效果
-import wow from "wowjs";
+// 滚动动画效果 scrollreveal
+import wow from 'wowjs';
 import 'animate.css';
 // Vue.prototype.$wow=wow
-//初始化滚动动画
+// 初始化滚动动画
 // new wow.WOW().init()
 Vue.prototype.$wow = wow;
 Vue.prototype.$MintUI = MintUI;
@@ -52,9 +52,9 @@ router.beforeEach((to, from, next) => {
 router.afterEach(() => {
     NProgress.done();
 });
-//云开发初始化
-Vue.prototype['tcb'] = tcb.init({
-    env: 'cj-25ff8c' // 新增的修改原型
+// 云开发初始化
+Vue.prototype.tcb = tcb.init({
+    env: 'cj-25ff8c',
 });
 console.log(Vue.prototype);
 Vue.use(MintUI);
@@ -62,12 +62,12 @@ Vue.use(MintUI);
 new Vue({
     router,
     store,
-    render: h => h(App),
-    beforeCreate: async function () {
+    render: (h) => h(App),
+    async beforeCreate() {
         // @ts-ignore
         const auth = this.tcb.auth({
-            //身份认证状态如何持久保留，有三个选项 local、session 和 none，默认为 session。
-            persistence: 'local' //用户显式退出或更改密码之前的30天一直有效
+            // 身份认证状态如何持久保留，有三个选项 local、session 和 none，默认为 session。
+            persistence: 'local',
         });
         // @ts-ignore
         this.tcb.auth().getLoginState().then((loginState) => {
@@ -87,6 +87,6 @@ new Vue({
         console.log(loginState)
         */
         await auth.signInAnonymously();
-    }
+    },
 }).$mount('#app');
 //# sourceMappingURL=main.js.map

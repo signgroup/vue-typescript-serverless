@@ -6,11 +6,11 @@ declare module 'vconsole';
 
 declare module 'vue/types/vue' {
     interface Vue {
-        $wow: any
+        $wow: any;
     }
 }
 declare module 'vue/types/vue' {
     interface Vue {
-        tcb: any
+        tcb: any;
     }
 }

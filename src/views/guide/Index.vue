@@ -34,21 +34,21 @@
 
 </template>
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 
-    @Component
-    export default class Guide extends Vue {
-        public logoUrl: string = 'http://13s.top/logo.png';
+@Component
+export default class Guide extends Vue {
+    public logoUrl: string = 'http://13s.top/logo.png';
 
-        mounted() {
-            new this['$wow'].WOW().init()
-            //幂次方
-            // 计算方法油耗×油价÷100（公里来）=一公里的油钱。
-            console.log(7.8*5.09/100*12)
-            console.log(Math.pow(3, -2) )
-            
-        }
+    public mounted() {
+        new this['$wow'].WOW().init();
+        // 幂次方
+        // 计算方法油耗×油价÷100（公里来）=一公里的油钱。
+       // console.log(7.8 * 5.09 / 100 * 12);
+        //console.log(Math.pow(3, -2) );
+
     }
+}
 </script>
 <style lang="less" scoped>
     .Guide {

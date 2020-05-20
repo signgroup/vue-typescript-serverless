@@ -7,8 +7,10 @@
                 首页
             </mt-tab-item>
             <mt-tab-item id="classification" @click.native="jumpRouter('classification')">
-                <img slot="icon" v-show="!(selected==='classification')" src="./../assets/img/tabbar/classification.png">
-                <img slot="icon" v-show="selected==='classification'" src="./../assets/img/tabbar/classification_cur.png">
+                <img slot="icon" v-show="!(selected==='classification')"
+                     src="./../assets/img/tabbar/classification.png">
+                <img slot="icon" v-show="selected==='classification'"
+                     src="./../assets/img/tabbar/classification_cur.png">
                 分类
             </mt-tab-item>
             <mt-tab-item id="about" @click.native="jumpRouter('about')">
@@ -21,32 +23,32 @@
 </template>
 <script lang="ts">
     import {Component, Vue, Watch} from 'vue-property-decorator';
-    import { Route } from "vue-router";
+    import {Route} from 'vue-router';
 
     @Component
     export default class Footer extends Vue {
-        selected: string = "home"
+        public selected: string = 'home';
         private isShowFooter: boolean = false;
 
         mounted() {
-            this.routeChange(this['$route'],this['$route']);
+            this.routeChange(this['$route'], this['$route']);
         }
 
         jumpRouter(path) {
-            if ( this['$route'].name == path) return;
+            if (this['$router'].name == path) return;
             this['$router'].push({name: path});
         }
 
-        @Watch("$route")
+        @Watch('$route')
         routeChange(val: Route, oldVal: Route): void {
-            console.log(val.name)
-            let routeName:string=val.name
+            console.log(val.name);
+            const routeName: string = val.name;
             if (
-                routeName === "home" ||
-                routeName === "classification" ||
-                routeName === "about"
+                routeName === 'home' ||
+                routeName === 'classification' ||
+                routeName === 'about'
             ) {
-                this.selected=routeName
+                this.selected = routeName;
                 this.isShowFooter = true;
             } else {
                 this.isShowFooter = false;
@@ -63,7 +65,7 @@
         z-index: 20;
         height: 58px;
         .mint-tabbar {
-            .is-selected{
+            .is-selected {
                 background: none;
             }
         }

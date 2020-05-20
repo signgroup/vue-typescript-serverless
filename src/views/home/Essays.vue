@@ -13,9 +13,12 @@
                 <div class="user-info">
                     <p class="nick-name wow slideInRight" data-wow-delay="1s'">{{userInfo.nickName}}</p>
                     <img v-lazy="userInfo.avatarUrl" class="avatar wow slideInRight" data-wow-delay=".3s"/>
+                    <!--bounceInRight-->
                 </div>
             </div>
-            <p class="signature-text">不用海誓山盟,不要海枯石烂,只求健健康康、度过此生</p>
+            <div class="wow bounceInRight ">
+                <p class="signature-text" >不用海誓山盟,不要海枯石烂,只求健健康康、度过此生</p>
+            </div>
             <div class="time-body">
                 <ul class="essays-list"
                     v-infinite-scroll="loadMore"
