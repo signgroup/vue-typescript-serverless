@@ -47,6 +47,7 @@
     </div>
 </template>
 <script lang="ts">
+    import utils from './../../assets/js/utils'
     import {Component, Vue, Watch} from 'vue-property-decorator';
 
     @Component
@@ -56,12 +57,12 @@
             avatarUrl: 'https://preview.cloud.189.cn/image/imageAction?param=356015D2573D285ADFB4968E41D9F55965A23130C7FECD548A18131029596F00BD46BB94500212AB4C8957E7D0E9AEE53E223A2B1D3571A589751EC811F878D5421EF508FF53292174731D2C8403CAB58C72F73DECA11A73F488E650', //默认头像
             nickName: '初见博客'
         };
-        private essayList = [];
-        private overflow: number = -1;
+        private essayList = [];//随笔数据列表
+        private overflow: number = -1;//溢出隐藏索引
         private skip: number = 0;//数据从0开始
         private limit: number = 20;//每页显示的条数
         private loading: boolean = false;
-        public opacity: number = 0;
+        public opacity: number = 0;//导航背景透明度
         private firstLoading: boolean = true;//首次加载loading
         private loadStatus: boolean = false;
         private noMore: boolean = false;//加载完毕
@@ -89,7 +90,7 @@
         }
 
         // 获取数据
-        getEssayList(skip, limit) {
+        getEssayList(skip:number, limit:number) {
             console.log(skip)
             let _this = this
             return new Promise(resolve => {
@@ -128,7 +129,7 @@
                             _this['$store'].commit('hideLoading')
                         }
                         list.forEach(function (value, index) {
-                            list[index].date = Essays.getDateDiff(value.date)
+                            list[index].date = utils.getDateDiff(new Date(value.date))
                         })
                         /* for (let i = 0; i < list.length; i++) {
                              _this.essayList.push(list[i])

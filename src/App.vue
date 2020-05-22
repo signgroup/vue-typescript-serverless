@@ -2,7 +2,7 @@
     <div id="app" class="bg">
         <!--<input type="text" v-model="age">
         <button @click="addCount">点击count值增加</button>-->
-        <router-view class="drag" />
+        <router-view class="drag"/>
         <MyFooter/>
         <Loading v-if="isLoading"></Loading>
     </div>
@@ -12,24 +12,23 @@
     import {mapState} from 'vuex'
     import Loading from '@/components/Loading.vue'
     import MyFooter from '@/components/Footer.vue'
+
     export default {
         name: 'App',
-        data(){
-            return {
-            
-            }
+        data() {
+            return {}
         },
-        components:{
+        components: {
             MyFooter,
             Loading
         },
-        computed:{
+        computed: {
             ...mapState([
                 'isLoading'
             ])
         },
-      mounted(){
-      }
+        mounted() {
+        }
     }
 </script>
 <!--<script lang="ts">
@@ -112,13 +111,13 @@
         }
     }
 </script>-->
-<style lang="less" >
+<style lang="less">
     @import './assets/less/common';
+    
     #nprogress .bar {
         background: #daa3fd !important; //自定义颜色
     }
-    #app {
-    }
+    
     .bg::before {
         content: "";
         position: fixed;
@@ -146,5 +145,5 @@
             background-position: 0 50%;
         }
     }
-   
+
 </style>

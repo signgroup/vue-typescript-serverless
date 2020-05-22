@@ -14,12 +14,12 @@
     </div>
 </template>
 <script lang="ts">
-import pdf from 'vue-pdf';
+// import pdf from 'vue-pdf';
 import {Component, Vue, Watch} from 'vue-property-decorator';
 
 @Component({
     components: {
-        pdf,
+        // pdf,
     },
 })
 
@@ -29,7 +29,7 @@ export default class Books extends Vue {
     private numPages: number = 1; // pdf分页
     private title: string = ''; // 标题
 
-    public pdfTask(pdfUrl) {
+   /* public pdfTask(pdfUrl) {
         this['$store'].commit('showLoading');
         const _this = this;
         const loadingTask = pdf.createLoadingTask(pdfUrl);
@@ -43,15 +43,15 @@ export default class Books extends Vue {
             console.error('pdf加载失败');
             _this['$store'].commit('hideLoading');
         });
-    }
+    }*/
 
-    public mounted() {
+    /*public mounted() {
         const data = JSON.parse(this['$route'].query.data);
         console.log(data);
         this.title = data.name;
         this.pdfTask(data.url);
         // this.pdfTask('https://dakaname.oss-cn-hangzhou.aliyuncs.com/file/2018-12-28/1546003237411.pdf')
-    }
+    }*/
 
     // 监听首次获取数据后执行动画
     @Watch('loadStatus')

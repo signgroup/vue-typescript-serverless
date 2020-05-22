@@ -2,7 +2,8 @@
     <div class="Guide ">
         <section class="wow bounceInDown  main-box">
             <div class="main">
-                <div class="avatar wow bounceInDown " data-wow-duration=".8s" data-wow-delay=".5s" data-wow-offset="400">
+                <div class="avatar wow bounceInDown " data-wow-duration=".8s" data-wow-delay=".5s"
+                     data-wow-offset="400">
                     <img class=" wow pulse " data-wow-duration="2s" data-wow-delay=".3s" data-wow-iteration="2"
                          v-lazy="logoUrl" alt="100">
                 </div>
@@ -27,28 +28,22 @@
                     </div>
                 </div>
             
-            
             </div>
         </section>
     </div>
 
 </template>
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+    import {Component, Vue} from 'vue-property-decorator';
 
-@Component
-export default class Guide extends Vue {
-    public logoUrl: string = 'http://13s.top/logo.png';
+    @Component
+    export default class Guide extends Vue {
+        public logoUrl: string = 'http://13s.top/logo.png';
 
-    public mounted() {
-        new this['$wow'].WOW().init();
-        // 幂次方
-        // 计算方法油耗×油价÷100（公里来）=一公里的油钱。
-       // console.log(7.8 * 5.09 / 100 * 12);
-        //console.log(Math.pow(3, -2) );
-
+        public mounted() {
+            new this['$wow'].WOW().init();
+        }
     }
-}
 </script>
 <style lang="less" scoped>
     .Guide {

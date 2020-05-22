@@ -14,8 +14,7 @@ import {Component, Vue} from 'vue-property-decorator';
 @Component
 
 export default class ArticleDetails extends Vue {
-    private article: object = {};
-    private content: object = {};
+    private article: object = {};//文章详情
 
     public mounted() {
         const id: string = this['$route'].query.id;

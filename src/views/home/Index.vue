@@ -8,278 +8,278 @@
                 </mt-swipe-item>
             </mt-swipe>
         </div>
-    <article class="wow bounceInRight  excerpt">
-        <p class="text-animate">
-            {{excerptText}}
-        </p>
-    </article>
-    <section class="container">
-        <div class="wow fadeInUp  grid-box">
-            <!--fadeInUpBig-->
-            <ul class="grid">
-                <li v-for="(item,index) in homeNavData" :key="index" :class="['wow slideInRight', item.bg_color]"
-                    :data-wow-delay="index*.2+'s'"
-                    @click="homeNavClick(item,index)"
-                >
-                    <i :class="['iconfont',item.icon]"></i>
-                    <span>{{item.name}}</span>
-                </li>
-            </ul>
-        </div>
-        <div class="wow fadeInUp mint-cell" v-if="articleList.length">
-            <div class="mint-cell-wrapper">
-                <div class="mint-cell-title">
-                    <i class="iconfont icon-titles text-orange"></i>
-                    <span>最新文章</span>
-                </div>
-            </div>
-            <div class="mint-cell-right"></div>
-        </div>
-        <article class="wow fadeInUp article-list">
-            <div class="wow fadeInUp article-content" v-for="(item,index) in articleList" :key="index"
-                 @click="articleDetails(item,index)">
-                <figure>
-                    <img class="article-img" v-lazy.container="item.url" alt=""/>
-                </figure>
-                <div class="desc">
-                    <p class="d-title">{{item.title}}</p>
-                </div>
-            </div>
+        <article class="wow bounceInRight  excerpt">
+            <p class="text-animate">
+                {{excerptText}}
+            </p>
         </article>
-    </section>
+        <section class="container">
+            <div class="wow fadeInUp  grid-box">
+                <!--fadeInUpBig-->
+                <ul class="grid">
+                    <li v-for="(item,index) in homeNavData" :key="index" :class="['wow slideInRight', item.bg_color]"
+                        :data-wow-delay="index*.2+'s'"
+                        @click="homeNavClick(item,index)"
+                    >
+                        <i :class="['iconfont',item.icon]"></i>
+                        <span>{{item.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="wow fadeInUp mint-cell" v-if="articleList.length">
+                <div class="mint-cell-wrapper">
+                    <div class="mint-cell-title">
+                        <i class="iconfont icon-titles text-orange"></i>
+                        <span>最新文章</span>
+                    </div>
+                </div>
+                <div class="mint-cell-right"></div>
+            </div>
+            <article class="wow fadeInUp article-list">
+                <div class="wow fadeInUp article-content" v-for="(item,index) in articleList" :key="index"
+                     @click="articleDetails(item,index)">
+                    <figure>
+                        <img class="article-img" v-lazy.container="item.url" alt=""/>
+                    </figure>
+                    <div class="desc">
+                        <p class="d-title">{{item.title}}</p>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
 </template>
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator';
+    import {Component, Vue, Watch} from 'vue-property-decorator';
 
-@Component
+    @Component
 
-export default class Home extends Vue {
-    private bannerData = [];
-    private homeNavData = [];
-    private articleList = [];
-    private excerptText: string = '当你的才华还撑不起你的野心时，那你就应该静下心来学习；当你的经济还撑不起你的梦想时，那你就应该踏实的去工作；当你的能力还驾驭不了你的目标时，就应该沉下心来，历练；梦想，不是浮躁，而是沉淀和积累，只有拼出来的美丽，没有等出来的辉煌。';
-    private hostList = [];
-    private loadStatus: boolean = false;
+    export default class Home extends Vue {
+        private bannerData = [];//轮播图数据
+        private homeNavData = [];//宫格数据
+        private articleList = [];//最新文章数据
+        private excerptText: string = '当你的才华还撑不起你的野心时，那你就应该静下心来学习；当你的经济还撑不起你的梦想时，那你就应该踏实的去工作；当你的能力还驾驭不了你的目标时，就应该沉下心来，历练；梦想，不是浮躁，而是沉淀和积累，只有拼出来的美丽，没有等出来的辉煌。';
+        private hostList = [];//热门文章数据
+        private loadStatus: boolean = false;//全局loading状态
 
-    public mounted() {
-        this.getPromise();
-    }
-
-    // 宫格点击
-    public homeNavClick(item, index) {
-        console.log(index);
-        console.log(item);
-        if (index == 1) {
-            this['$router'].push({name: 'calculation'});
-            return;
+        mounted() {
+            this.getPromise();
         }
-        this['$router'].push({name: item.route});
-    }
 
-    /*
-    * 点击文章
-    * item 当前点击数据
-    * index 当前点击索引
-    * */
-    public articleDetails(item, index) {
-        console.log(item);
-        // console.log(_.inc(1)) //数据库自增1，多人访问
-        // _.mul(2)//自乘
-        // 修改 查看加1
-        this['tcb'].callFunction({
-            name: 'incCloud',
-            data: {
-                db: 'blog',
-                id: item._id,
-                params: ['view'],
-            },
-        })
-            .then((res) => {
-                // 本地增加1 少请求云函数
-                this.articleList[index].view += 1;
-                console.log(res.result);
-                this['$router'].push({
-                    path: 'article-details',
-                    query: {id: item._id},
-                });
-            });
-    }
+        // 宫格点击
+        homeNavClick(item, index) {
+            console.log(index);
+            console.log(item);
+            if (index == 1) {
+                this['$router'].push({name: 'calculation'});
+                return;
+            }
+            this['$router'].push({name: item.route});
+        }
 
-    // 使用Promise回调
-    public getPromise() {
-        this['$indicator'].open('加载中...');
-        this['$store'].commit('showLoading');
-
-        const _this = this;
-        Promise.all([
-            _this.getBanner(),
-            _this.getArticleList(),
-            _this.getHotList(),
-            _this.getHomeNav(),
-            _this.getHomeMate(),
-        ])
-            .then(function(value) {
-                console.log(value);
-                // new  _this.$wow.WOW().init()
-                _this.loadStatus = true;
-                _this['$store'].commit('hideLoading');
-                _this['$indicator'].close();
-            })
-            .catch((err) => {
-                console.log(err);
-                _this['$indicator'].close();
-            });
-    }
-
-    // 获取轮播图
-    public getBanner() {
-        return new Promise((resolve) => {
-           this['tcb'].callFunction({
-                name: 'getCloud',
-                data: {
-                    db: 'banner',
-                    skip: 0, // 条件限制，根据需要传参
-                    limit: 5,
-                },
-            })
-                .then((res: any) => {
-                    const list = res.result.res.data;
-                    console.log(list);
-                    this.bannerData = list;
-                    return resolve(list);
-                })
-                .catch((res) => {
-                    console.log(res);
-
-                });
-        });
-    }
-
-    // 最新文章
-    public getArticleList() {
-        return new Promise((resolve) => {
-            this.getBlog(resolve, 'articleList', 'date', 'desc');
-        });
-    }
-
-    // 热门推荐
-    public getHotList() {
-        return new Promise((resolve) => {
-            this.getBlog(resolve, 'hostList', 'view', 'desc');
-
-        });
-    }
-
-    /*
-    * 获取日志文章
-    * resolve promise 返回
-    * str 表名
-    * key 要排序的字段（日期）
-    * value 排序类型（倒序）
-    * */
-    public getBlog(resolve: any, str: string, key: string, value: string) {
-        // console.log(str)
-        this['tcb'].callFunction({
-            name: 'getCloud',
-            data: {
-                db: 'blog',
-                skip: 0, // 条件限制，根据需要传参
-                limit: 8,
-                orderBy: {
-                    key,
-                    value,
-                },
-            },
-        })
-            .then((res: any) => {
-                console.log(res);
-                const list = res.result.res.data;
-                // console.log(list)
-                // 对象key动态赋值
-                // let obj={}
-                // Object.defineProperty(obj,str,{
-                //   enumerable:false,
-                //   configurable:false,
-                //   writable:false,
-                //   value: list
-                // })
-                // console.log(obj)
-                this[str] = list;
-                return resolve(list);
-            })
-            .catch((res) => {
-                console.log(res);
-            });
-    }
-
-    // 获取宫格数据导航
-    public getHomeNav() {
-        const _this = this;
-        return new Promise((resolve) => {
+        /*
+        * 点击文章
+        * item 当前点击数据
+        * index 当前点击索引
+        * */
+        articleDetails(item, index) {
+            console.log(item);
+            // console.log(_.inc(1)) //数据库自增1，多人访问
+            // _.mul(2)//自乘
+            // 修改 查看加1
             this['tcb'].callFunction({
-                name: 'getCloud',
+                name: 'incCloud',
                 data: {
-                    db: 'home_nav',
-                    skip: 0, // 条件限制，根据需要传参
-                    limit: 4,
+                    db: 'blog',
+                    id: item._id,
+                    params: ['view'],
                 },
             })
-                .then((res: any) => {
-                    console.log(res);
-                    const list = res.result.res.data;
-                    this.homeNavData = list;
-                    return resolve(list);
-                })
-                .catch((res) => {
-                    console.log(res);
+                .then((res) => {
+                    // 本地增加1 少请求云函数
+                    this.articleList[index].view += 1;
+                    console.log(res.result);
+                    this['$router'].push({
+                        path: 'article-details',
+                        query: {id: item._id},
+                    });
                 });
-        });
-    }
+        }
 
-    // 获取宫格数据导航
-    public getHomeMate() {
-        return new Promise((resolve) => {
-            this['tcb'].callFunction({
-                name: 'getCloud',
-                data: {
-                    db: 'home_mate',
-                    skip: 0, // 条件限制，根据需要传参
-                    limit: 4,
-                },
-            })
-                .then((res: any) => {
-                    console.log(res);
-                    const list = res.result.res.data;
-                    return resolve(list);
+        // 使用Promise回调
+        getPromise() {
+            this['$indicator'].open('加载中...');
+            this['$store'].commit('showLoading');
+
+            const _this = this;
+            Promise.all([
+                _this.getBanner(),
+                _this.getArticleList(),
+                _this.getHotList(),
+                _this.getHomeNav(),
+                _this.getHomeMate(),
+            ])
+                .then(function (value) {
+                    console.log(value);
+                    // new  _this.$wow.WOW().init()
+                    _this.loadStatus = true;
+                    _this['$store'].commit('hideLoading');
+                    _this['$indicator'].close();
                 })
-                .catch((res) => {
-                    console.log(res);
+                .catch((err) => {
+                    console.log(err);
+                    _this['$indicator'].close();
                 });
-        });
-    }
+        }
 
-    @Watch('loadStatus')
-    public getLoadStatus(newVal: any, oldVal: any) {
-        console.log(newVal);
-        if (newVal) {
-            this.$nextTick(() => { // 在dom渲染完后,再执行动画
-                const wow = new this['$wow'].WOW(
-                    {
-                        boxClass: 'wow',      // 默认属性名
-                        animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
-                        offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
-                        mobile: true,       // 是否在移动设备中开启动画
-                        live: false,        // 持续监测页面中是否插入新的wow元素
-                        scrollContainer: '.home', //
+        // 获取轮播图
+        getBanner() {
+            return new Promise((resolve) => {
+                this['tcb'].callFunction({
+                    name: 'getCloud',
+                    data: {
+                        db: 'banner',
+                        skip: 0, // 条件限制，根据需要传参
+                        limit: 5,
                     },
-                );
-                wow.init();
+                })
+                    .then((res: any) => {
+                        const list = res.result.res.data;
+                        console.log(list);
+                        this.bannerData = list;
+                        return resolve(list);
+                    })
+                    .catch((res) => {
+                        console.log(res);
+
+                    });
             });
         }
-    }
 
-}
+        // 最新文章
+        getArticleList() {
+            return new Promise((resolve) => {
+                this.getBlog(resolve, 'articleList', 'date', 'desc');
+            });
+        }
+
+        // 热门推荐
+        getHotList() {
+            return new Promise((resolve) => {
+                this.getBlog(resolve, 'hostList', 'view', 'desc');
+
+            });
+        }
+
+        /*
+        * 获取日志文章
+        * resolve promise 返回
+        * str 表名
+        * key 要排序的字段（日期）
+        * value 排序类型（倒序）
+        * */
+        getBlog(resolve: any, str: string, key: string, value: string) {
+            // console.log(str)
+            this['tcb'].callFunction({
+                name: 'getCloud',
+                data: {
+                    db: 'blog',
+                    skip: 0, // 条件限制，根据需要传参
+                    limit: 8,
+                    orderBy: {
+                        key,
+                        value,
+                    },
+                },
+            })
+                .then((res: any) => {
+                    console.log(res);
+                    const list = res.result.res.data;
+                    // console.log(list)
+                    // 对象key动态赋值
+                    // let obj={}
+                    // Object.defineProperty(obj,str,{
+                    //   enumerable:false,
+                    //   configurable:false,
+                    //   writable:false,
+                    //   value: list
+                    // })
+                    // console.log(obj)
+                    this[str] = list;
+                    return resolve(list);
+                })
+                .catch((res) => {
+                    console.log(res);
+                });
+        }
+
+        // 获取宫格数据导航
+        getHomeNav() {
+            const _this = this;
+            return new Promise((resolve) => {
+                this['tcb'].callFunction({
+                    name: 'getCloud',
+                    data: {
+                        db: 'home_nav',
+                        skip: 0, // 条件限制，根据需要传参
+                        limit: 4,
+                    },
+                })
+                    .then((res: any) => {
+                        console.log(res);
+                        const list = res.result.res.data;
+                        this.homeNavData = list;
+                        return resolve(list);
+                    })
+                    .catch((res) => {
+                        console.log(res);
+                    });
+            });
+        }
+
+        // 获取宫格数据导航
+        getHomeMate() {
+            return new Promise((resolve) => {
+                this['tcb'].callFunction({
+                    name: 'getCloud',
+                    data: {
+                        db: 'home_mate',
+                        skip: 0, // 条件限制，根据需要传参
+                        limit: 4,
+                    },
+                })
+                    .then((res: any) => {
+                        console.log(res);
+                        const list = res.result.res.data;
+                        return resolve(list);
+                    })
+                    .catch((res) => {
+                        console.log(res);
+                    });
+            });
+        }
+
+        @Watch('loadStatus')
+        getLoadStatus(newVal: any, oldVal: any) {
+            console.log(newVal);
+            if (newVal) {
+                this.$nextTick(() => { // 在dom渲染完后,再执行动画
+                    const wow = new this['$wow'].WOW(
+                        {
+                            boxClass: 'wow',      // 默认属性名
+                            animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
+                            offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
+                            mobile: true,       // 是否在移动设备中开启动画
+                            live: false,        // 持续监测页面中是否插入新的wow元素
+                            scrollContainer: '.home', //
+                        },
+                    );
+                    wow.init();
+                });
+            }
+        }
+
+    }
 </script>
 <style lang="less">
     .Index {

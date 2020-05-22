@@ -3,14 +3,18 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index';
 import store from './store';
+//表格数据解析
+import vueXlsxTable from 'vue-xlsx-table';
+//HTML5 FileReader API 有两个方法可以读取本地文件 readAsBinaryString 和 readAsArrayBuffer, 默认rABS为true，也就是使用readAsBinaryString
+Vue.use(vueXlsxTable, { rABS: false });
 // MintUI框架[http://mint-ui.github.io/#!/zh-cn]
 import MintUI from 'mint-ui';
 import 'mint-ui/lib/style.css';
 if (process.env.NODE_ENV === 'production') {
-    require('./assets/consoleInfo');
+    require('./assets/js/consoleInfo');
 }
 // 网络环境提示
-import network from './assets/network';
+import network from './assets/js/network';
 const nt = network.networkType;
 console.log(nt);
 if (nt == '2g' || nt == '3g') {
@@ -21,7 +25,7 @@ if (nt == '2g' || nt == '3g') {
     });
 }
 // 导入版本
-import version from './assets/version';
+import version from './assets/js/version';
 console.log('version', version.version);
 // import VConsole from 'vconsole'
 // let vConsole = new VConsole()

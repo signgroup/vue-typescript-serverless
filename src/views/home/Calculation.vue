@@ -175,7 +175,7 @@ export default class Calculation extends Vue {
     }
 
     public mounted() {
-        ['price', 'attrition'].map((item) => this._countResult(item));
+        ['price', 'attrition'].map(item => this._countResult(item));
         new this['$wow'].WOW().init();
         /* this['$store'].commit('showLoading')
          setTimeout(()=>{

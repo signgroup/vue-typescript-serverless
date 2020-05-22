@@ -19,74 +19,72 @@
 
 </template>
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator';
+    import {Component, Vue, Watch} from 'vue-property-decorator';
 
-@Component
+    @Component
 
-export default class Books extends Vue {
-    private loadStatus: boolean = false; // loading状态
-    private bookData: object = [];
-    private currentPage: number = 0;
-    private pageCount: number = 0;
+    export default class Books extends Vue {
+        private loadStatus: boolean = false; // loading状态
+        private bookData: object = [];
+        private currentPage: number = 0;
+        private pageCount: number = 0;
 
-    public getBooks() {
-        this['$store'].commit('showLoading');
-        // console.log(str)
-        const _this = this;
-        this['tcb'].callFunction({
-            name: 'getCloud',
-            data: {
-                db: 'books',
-                skip: 0, // 条件限制，根据需要传参
-                limit: 20,
-            },
-        })
-            .then((res: any) => {
-                const list = res.result.res.data;
-                console.log(list);
-                _this.bookData = list;
-                _this.loadStatus = true;
-                _this['$store'].commit('hideLoading');
+        //获取书列表
+        getBooks(): void {
+            this['$store'].commit('showLoading');
+            // console.log(str)
+            const _this = this;
+            this['tcb'].callFunction({
+                name: 'getCloud',
+                data: {
+                    db: 'books',
+                    skip: 0, // 条件限制，根据需要传参
+                    limit: 20,
+                },
             })
-            .catch((res) => {
-                console.log(res);
-            });
-    }
+                .then((res: any) => {
+                    const list = res.result.res.data;
+                    console.log(list);
+                    _this.bookData = list;
+                    _this.loadStatus = true;
+                    _this['$store'].commit('hideLoading');
+                })
+                .catch((res) => {
+                    console.log(res);
+                });
+        }
 
-    public _openBook(data) {
-        // this['$router'].push({name: 'pdf',query:{data:JSON.stringify(data)}});
-        window.open(data.url);
-    }
+        //跳转路由默认浏览器（手机显示下载）
+        //pdf插件加载慢
+        static _openBook(data: any) {
+            // this['$router'].push({name: 'pdf',query:{data:JSON.stringify(data)}});
+            window.open(data.url);
+        }
 
-    public mounted() {
-        this.getBooks();
-        /* this['$store'].commit('showLoading')
-         setTimeout(()=>{
-             this['$store'].commit('hideLoading')
-             this.loadStatus=true
-         },300)*/
-    }
+        mounted() {
+            this.getBooks();
+        }
 
-    // 监听首次获取数据后执行动画
-    @Watch('loadStatus')
-    public getLoadStatus(newVal, oldVal) {
-        console.log('newVal', newVal);
-        if (newVal) {
-            this.$nextTick(() => { // 在dom渲染完后,再执行动画
-                const wow = new this['$wow'].WOW(
-                    {
-                        boxClass: 'wow',      // 默认属性名
-                        animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
-                        offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
-                        mobile: true,       // 是否在移动设备中开启动画
-                        live: false,        // 持续监测页面中是否插入新的wow元素
-                    },
-                );
-                wow.init();
-            });
+        // 监听首次获取数据后执行动画
+        @Watch('loadStatus')
+        getLoadStatus(newVal: boolean, oldVal: boolean) {
+            console.log('newVal', newVal);
+            if (newVal) {
+                this.$nextTick(() => { // 在dom渲染完后,再执行动画
+                    const wow = new this['$wow'].WOW(
+                        {
+                            boxClass: 'wow',      // 默认属性名
+                            animateClass: 'animated', // 默认触发的动画类(包含在animate css中)
+                            offset: 0,          // 为所有添加wow的元素设置 data-wow-delay属性 的默认值
+                            mobile: true,       // 是否在移动设备中开启动画
+                            live: false,        // 持续监测页面中是否插入新的wow元素
+                        },
+                    );
+                    wow.init();
+                });
+            }
         }
     }
-}
 </script>
 
 <style lang="less" scoped>
