@@ -2,6 +2,7 @@ module.exports = {
     publicPath: './',
     // 部署应用时的基本 URL
     css: {
+        extract: true,
         loaderOptions: {
             postcss: {
                 plugins: [
@@ -20,6 +21,8 @@ module.exports = {
     outputDir: 'build',
     //放置生成的静态资源（js、css、img、fonts）的相对路径
     assetsDir: './static',
+    //html 的输出路径 默认index
+    indexPath:"index.html",
     // eslint-loader 是否在保存的时候检查
     lintOnSave: false,
     productionSourceMap:false,//关闭js map文件

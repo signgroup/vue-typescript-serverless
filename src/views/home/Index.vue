@@ -26,15 +26,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="wow fadeInUp mint-cell" v-if="articleList.length">
-                <div class="mint-cell-wrapper">
-                    <div class="mint-cell-title">
-                        <i class="iconfont icon-titles text-orange"></i>
-                        <span>最新文章</span>
-                    </div>
-                </div>
-                <div class="mint-cell-right"></div>
-            </div>
+            <cell-title class="wow fadeInUp" v-if="articleList.length" name="最新文章"></cell-title>
             <article class="wow fadeInUp article-list">
                 <div class="wow fadeInUp article-content" v-for="(item,index) in articleList" :key="index"
                      @click="articleDetails(item,index)">
@@ -50,9 +42,15 @@
     </div>
 </template>
 <script lang="ts">
+    import CellTitle from "@/components/CellTitle.vue";
+
     import {Component, Vue, Watch} from 'vue-property-decorator';
 
-    @Component
+    @Component({
+        components: {
+            CellTitle
+        }
+    })
 
     export default class Home extends Vue {
         private bannerData = [];//轮播图数据

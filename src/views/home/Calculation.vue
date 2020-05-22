@@ -5,15 +5,7 @@
                 <mt-button icon="back">返回</mt-button>
             </router-link>
         </mt-header>
-        <div class="wow fadeInUp  mint-cell">
-            <div class="mint-cell-wrapper">
-                <div class="mint-cell-title">
-                    <i class="iconfont icon-titles text-orange"></i>
-                    <span>公里油价</span>
-                </div>
-            </div>
-            <div class="mint-cell-right"></div>
-        </div>
+        <cell-title class="wow fadeInUp" name="公里油价" :icon="{show:true,color:'#f37b1d'}"></cell-title>
         <div class="wow fadeInUp  form-row">
             <mt-field label="油耗" placeholder="请输入油耗" type="number" :state="attritionError"
                       v-model="attrition"></mt-field>
@@ -31,15 +23,7 @@
                 {{kilometreNum}}km
             </mt-cell>
         </div>
-        <div class="wow fadeInUpBig  mint-cell">
-            <div class="mint-cell-wrapper">
-                <div class="mint-cell-title">
-                    <i class="iconfont icon-titles text-orange"></i>
-                    <span>大小写转换</span>
-                </div>
-            </div>
-            <div class="mint-cell-right"></div>
-        </div>
+        <cell-title class="wow fadeInUpBig" name="大小写转换"></cell-title>
         <div class="wow fadeInUpBig  form-row">
             <mt-field placeholder="请输入英文字母" type="text" v-model="toUpperCase">
                 <mt-button type="primary" size="small" @click="_transform('toUpperCase')">转大写</mt-button>
@@ -61,12 +45,16 @@
             </mt-cell>
         </div>
     </div>
-
 </template>
 <script lang="ts">
+import CellTitle from "@/components/CellTitle.vue";
 import {Component, Vue, Watch} from 'vue-property-decorator';
 
-@Component
+@Component({
+    components:{
+        CellTitle
+    }
+})
 
 export default class Calculation extends Vue {
 
