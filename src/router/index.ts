@@ -6,7 +6,7 @@ const Home = () => import(/* webpackChunkName: "home" */ './../views/home/Index.
 // import Guide from './../views/guide/Index.vue';
 const Guide = () => import(/* webpackChunkName: "guide" */ './../views/guide/Index.vue')
 // import ArticleDetails from './../views/home/ArticleDetails.vue';
-const ArticleDetails = () => import(/* webpackChunkName: "article-details" */ './../views/guide/Index.vue')
+const ArticleDetails = () => import(/* webpackChunkName: "article-details" */ './../views/home/ArticleDetails.vue')
 // import Essays from './../views/home/Essays.vue';
 const Essays = () => import(/* webpackChunkName: "essays" */ './../views/home/Essays.vue')
 // import Classification from './../views/classification/Index.vue';

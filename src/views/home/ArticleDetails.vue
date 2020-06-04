@@ -45,7 +45,7 @@ export default class ArticleDetails extends Vue {
         height: 100vh;
         overflow-y: scroll;
         img {
-            width: 100%;
+            width: 100% ;
         }
         .container {
             padding: 0 15px;

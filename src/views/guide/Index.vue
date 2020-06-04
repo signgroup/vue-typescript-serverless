@@ -1,5 +1,5 @@
 <template>
-    <div class="Guide ">
+    <div class="Guide" :style="bgColor">
         <section class="wow bounceInDown  main-box">
             <div class="main">
                 <div class="avatar wow bounceInDown " data-wow-duration=".8s" data-wow-delay=".5s"
@@ -27,7 +27,6 @@
                          <a href="http://beian.miit.gov.cn/" target="_blank">豫ICP备17032559号-1</a> </span>
                     </div>
                 </div>
-            
             </div>
         </section>
     </div>
@@ -39,20 +38,40 @@
     @Component
     export default class Guide extends Vue {
         public logoUrl: string = 'http://13s.top/logo.png';
+        private timer: any = null;
+
+        public bgColor: object = {};
 
         public mounted() {
+            this.randomNum()
             new this['$wow'].WOW().init();
+        }
+
+        randomNum() {
+            const _random = (num = 0) => {
+                return Math.ceil(Math.random() * num)
+            }
+            this.timer = setInterval(() => {
+                this.bgColor = {
+                    background: `linear-gradient(to left bottom, hsl(${_random(255)}, 100%, 85%) 0%,hsl(${_random(255)}, 100%, 85%) 100%)`
+                }
+            }, 5000)
+        }
+
+        destroyed() {
+            clearInterval(this.timer)
         }
     }
 </script>
 <style lang="less" scoped>
     .Guide {
         width: 100%;
-        height: 100%;
+        height: 100vh;
         z-index: 9999;
         overflow: hidden;
         display: flex;
         margin: 0 auto;
+        position: fixed;
         .main-box {
             position: absolute;
             bottom: 20px;
