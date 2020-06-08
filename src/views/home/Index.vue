@@ -99,7 +99,7 @@
                     console.log(res.result);
                     this['$router'].push({
                         path: 'article-details',
-                        query: {id: item._id},
+                        query: {id: item._id,title:item.title},
                     });
                 });
         }

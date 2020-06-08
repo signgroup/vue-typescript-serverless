@@ -74,7 +74,7 @@
         position: fixed;
         .main-box {
             position: absolute;
-            bottom: 20px;
+            bottom: 15vh;
             left: 20px;
             width: calc(100% - 40px);
             background: #fff;

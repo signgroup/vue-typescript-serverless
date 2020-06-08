@@ -60,7 +60,7 @@
         private essayList = [];//随笔数据列表
         private overflow: number = -1;//溢出隐藏索引
         private skip: number = 0;//数据从0开始
-        private limit: number = 20;//每页显示的条数
+        private limit: number = 252;//每页显示的条数
         private loading: boolean = false;
         public opacity: number = 0;//导航背景透明度
         private firstLoading: boolean = true;//首次加载loading

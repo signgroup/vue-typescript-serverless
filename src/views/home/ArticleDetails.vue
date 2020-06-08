@@ -1,6 +1,6 @@
 <template>
     <div class="ArticleDetails container-box">
-        <mt-header fixed title="详情">
+        <mt-header fixed :title="title">
             <router-link to="/home" slot="left">
                 <mt-button icon="back">返回</mt-button>
             </router-link>
@@ -15,12 +15,14 @@ import {Component, Vue} from 'vue-property-decorator';
 
 export default class ArticleDetails extends Vue {
     private article: object = {};//文章详情
-
+    private title: string = '详情';//标题
+    created(){
+        this.title=this['$route'].query.title
+    }
     public mounted() {
         const id: string = this['$route'].query.id;
         this.getDetails(id);
     }
-
     // 根据id获取详情
     public getDetails(id) {
         this['tcb'].callFunction({

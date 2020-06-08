@@ -14,19 +14,18 @@ if (process.env.NODE_ENV === 'production') {
     require('./assets/js/consoleInfo');
 }
 // 网络环境提示
-import network from './assets/js/network';
-const nt = network.networkType;
-console.log(nt);
-if (nt == '2g' || nt == '3g') {
+import { network } from './assets/js/network';
+console.log('network', network);
+if (network === '2g' || network === '3g') {
     MintUI.Toast({
         message: '当前网络环境较慢',
         position: 'top',
         duration: 3000,
     });
 }
-// 导入版本
-import version from './assets/js/version';
-console.log('version', version.version);
+// 导入版本号
+import { version } from './assets/js/version';
+console.log('version', version);
 // import VConsole from 'vconsole'
 // let vConsole = new VConsole()
 // yarn add vue-tcb
